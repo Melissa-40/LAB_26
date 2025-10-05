@@ -1,0 +1,46 @@
+---
+title: "LAB_26(MD)"
+author: "Melissa Cobos Ruíz"
+date: "2025-10-05"
+output: html_document
+---
+
+Correr las librerias
+```{r}
+library(tidyverse)
+library(datos)
+```
+Ordenar datos con la tabla4a (PIVOTAR)
+```{r}
+t4a_PIVOTANTE=tabla4a %>% 
+  pivot_longer(cols=c("1999", "2000"), names_to="anio", values_to="casos")
+```
+
+EJERCICIO 2: PIVOTAR Y UNIR TABLAS
+PARTE 2
+ver tabla4b
+1. Pivotar tabla 4b "A LO LARGO"
+```{r}
+t4b_PIVOTANTE = tabla4b %>% 
+  pivot_longer(cols = c(`1999`, `2000`), names_to = "anio", values_to = "población")
+```
+Unir tablas ordenadas
+```{r}
+union_t4=left_join(t4a_PIVOTANTE, t4b_PIVOTANTE)
+```
+Exportar resultado: tabla4a + tabla4b (ordenada)
+```{r}
+write.csv(union_t4, file = "union_t4.csv")
+```
+
+EJERCICIO 3: DATOS ANCHOS CON TABLA 2
+1. Pivotar tabla 2 "A LO ANCHO"
+VER TABLA 2 
+Ordenar datos con la tabla 2 (PIVOTAR a lo ANCHO)
+```{r}
+t2_ancha=tabla2 %>% pivot_wider(names_from = tipo, values_from = cuenta)
+```
+Exportar resultado: tabla ordenada
+```{r}
+write.csv(t2_ancha, file = "t2_ancha.csv")
+```
